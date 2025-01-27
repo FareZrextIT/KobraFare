@@ -1,11 +1,12 @@
-import pygame
-import sys
 import random
+import sys
+
+import pygame
 
 speed = 15
 
 # velicina prozora
-
+# Dodat cu funkciju za prilagodjavanje rezolucije
 frame_size_x = 720
 frame_size_y = 480
 
@@ -29,7 +30,6 @@ green = pygame.Color(0, 192, 0)
 cyan = pygame.Color(0, 255, 255)
 white = pygame.Color(255, 255, 255)
 brown = pygame.Color(160, 128, 96)
-
 
 fps_controller = pygame.time.Clock()
 # jedna zmijina velicina kruga
@@ -92,7 +92,6 @@ def show_menu():
 # prikaz menija
 show_menu()
 
-
 # definisemo pocetni smjer
 direction = "RIGHT"
 # petlja igre
@@ -108,22 +107,23 @@ while True:
                 paused = not paused
 
         if not paused:
-            if (
-                event.key == pygame.K_UP or event.key == ord("w")
-            ) and direction != "DOWN":
-                direction = "UP"
-            elif (
-                event.key == pygame.K_DOWN or event.key == ord("s")
-            ) and direction != "UP":
-                direction = "DOWN"
-            elif (
-                event.key == pygame.K_LEFT or event.key == ord("a")
-            ) and direction != "RIGHT":
-                direction = "LEFT"
-            elif (
-                event.key == pygame.K_RIGHT or event.key == ord("d")
-            ) and direction != "LEFT":
-                direction = "RIGHT"
+            if event.type == pygame.KEYDOWN:
+                if (
+                    event.key == pygame.K_w or event.key == ord("w")
+                ) and direction != "DOWN":
+                    direction = "UP"
+                elif (
+                    event.key == pygame.K_s or event.key == ord("s")
+                ) and direction != "UP":
+                    direction = "DOWN"
+                elif (
+                    event.key == pygame.K_a or event.key == ord("a")
+                ) and direction != "RIGHT":
+                    direction = "LEFT"
+                elif (
+                    event.key == pygame.K_d or event.key == ord("d")
+                ) and direction != "LEFT":
+                    direction = "RIGHT"
 
     if paused:
         # Pauza - prikazivanje menija za pauzu
@@ -151,7 +151,6 @@ while True:
 
     else:
         # Ako igra nije na pauzi, nastavi sa logikom igre
-
         if direction == "UP":
             head_pos[1] -= square_size
         elif direction == "DOWN":
@@ -171,7 +170,6 @@ while True:
             head_pos[1] = 0
 
         # jedenje jabuke
-
         snake_body.insert(0, list(head_pos))
         if head_pos[0] == food_pos[0] and head_pos[1] == food_pos[1]:
             score += 1
@@ -188,7 +186,6 @@ while True:
             food_spawn = True
 
         # GFX
-
         game_window.fill((0, 192, 0))
         for pos in snake_body:
             pygame.draw.rect(
