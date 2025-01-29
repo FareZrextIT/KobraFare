@@ -25,8 +25,10 @@ game_window = pygame.display.set_mode((frame_size_x, frame_size_y))
 # boje
 blue = pygame.Color(0, 0, 255)
 yellow = pygame.Color(255, 255, 0)
+gray = pygame.Color(128, 128, 128)
 red = pygame.Color(255, 0, 0)
-green = pygame.Color(0, 192, 0)
+brightgreen = pygame.Color(106, 190, 48)
+green = pygame.Color(2, 48, 32)
 cyan = pygame.Color(0, 255, 255)
 white = pygame.Color(255, 255, 255)
 brown = pygame.Color(160, 128, 96)
@@ -186,17 +188,17 @@ while True:
             food_spawn = True
 
         # GFX
-        game_window.fill((0, 192, 0))
+        game_window.fill((2, 48, 32))
         for pos in snake_body:
             pygame.draw.rect(
                 game_window,
-                brown,
+                brightgreen,
                 pygame.Rect(pos[0] + 2, pos[1] + 2, square_size - 2, square_size),
             )
 
         pygame.draw.rect(
             game_window,
-            red,
+            gray,
             pygame.Rect(food_pos[0], food_pos[1], square_size, square_size),
         )
 
