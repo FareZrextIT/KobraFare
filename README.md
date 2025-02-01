@@ -12,32 +12,33 @@ Igra Zmija je žanr akcionih video igara u kojima igrač upravlja zmiju.Igrač m
 
 # Pokretanje igre
 Prvo trebate da klonirate projekat na terminalu
-¨¨bash
+```bash
 git clone https://github.com/FareZrextIT/KobraFare.git
-¨¨
+```
 Drugo trebate da promjenite direktorij 
-¨¨bash
+```bash
 cd .\KobraFare\
-¨¨
+```
 Treće Trebate instalirati Rye
-¨¨bash
+```bash
 curl -sSf https://rye-up.com/get | bash
-¨¨
+```
 Četvrto sinkronizujete
-¨¨bash
+```bash
 rye sync
-¨¨
+```
 Peto pokrenete igru
-¨¨bash
+```bash
 rye run python .\src\kobrafare\main.py
-¨¨
+```
 
 
 # Korišteni alati
-Programski jezik koji je korišten je: Python
-Biblioteke: Pygame(za razvoj igre)
-Package Manager: Rye
-Razvojno okruženje: Visual Studio Code
+
+Programski jezik koji je korišten je: Python <br>
+Biblioteke: Pygame(za razvoj igre) <br>
+Package Manager: Rye <br>
+Razvojno okruženje: Visual Studio Code <br>
 
 # Kontrole 
 Zmija se kreće tipkama WASD, i ide gore,delo i lijevo,desno.
