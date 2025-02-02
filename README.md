@@ -2,8 +2,8 @@
 
 # Sadržaj
 1. [O igri općenito](#o-igri-općenito)
-2. [pokretanje igre](#pokretanje-igre)
-3. [korišteni alati](#korišteni-alati)
+2. [Pokretanje igre](#pokretanje-igre)
+3. [Korišteni alati](#korišteni-alati)
 4. [Kontrole](#kontrole)
 
 # O igri općenito
