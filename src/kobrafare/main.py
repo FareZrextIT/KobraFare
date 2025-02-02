@@ -1,19 +1,26 @@
 import random
+
 import sys
+
+import os
 
 import pygame
 
+# Brzina igre
 speed = 15
 
-# velicina prozora
-# Dodat cu funkciju za prilagodjavanje rezolucije
+# Veličina kvadrata zmije
+square_size = 30
+
+# Veličina prozora
 frame_size_x = 720
 frame_size_y = 480
 
-check_errors = pygame.init()
 
+# Inicijalizacija igre
+check_errors = pygame.init()
 if check_errors[1] > 0:
-    print("Greska " + check_errors[1])
+    print("Greska " + str(check_errors[1]))
 else:
     print("Igra uspjesno inicijalizirana")
 
@@ -21,25 +28,31 @@ else:
 pygame.display.set_caption("Igra Zmija")
 game_window = pygame.display.set_mode((frame_size_x, frame_size_y))
 
+# Učitavanje slika za zmijinu glavu i hranu
+snake_head_img = pygame.image.load("snake_head.png")
 
-# boje
+snake_head_img = pygame.transform.scale(snake_head_img, (square_size, square_size))
+
+food_img = pygame.image.load("food.png")
+
+food_img = pygame.transform.scale(food_img, (square_size, square_size))
+
+# Boje
 blue = pygame.Color(0, 0, 255)
 yellow = pygame.Color(255, 255, 0)
 gray = pygame.Color(128, 128, 128)
 brightgreen = pygame.Color(106, 190, 48)
 red = pygame.Color(255, 0, 0)
 green = pygame.Color(2, 48, 32)
-cyan = pygame.Color(0, 255, 255)
 white = pygame.Color(255, 255, 255)
 brown = pygame.Color(160, 128, 96)
 
-fps_controller = pygame.time.Clock()
-# jedna zmijina velicina kruga
-square_size = 20
 
+# Kontroler brzine igre
+fps_controller = pygame.time.Clock()
 paused = False
 
-
+# Inicijalizacija varijabli igre
 def init_vars():
     global head_pos, snake_body, food_pos, food_spawn, score, direction
     direction = "RIGHT"
@@ -47,58 +60,54 @@ def init_vars():
     snake_body = [[120, 60]]
     food_pos = [
         random.randrange(1, (frame_size_x // square_size)) * square_size,
+
         random.randrange(1, (frame_size_y // square_size)) * square_size,
     ]
+
     food_spawn = True
     score = 0
 
-
 init_vars()
 
-
+# Prikaz rezultata
 def show_score(choice, color, font, size):
     score_font = pygame.font.SysFont(font, size)
     score_surface = score_font.render("Rezultat: " + str(score), True, color)
     score_rect = score_surface.get_rect()
+    
     if choice == 1:
         score_rect.midtop = (frame_size_x / 10, 15)
     else:
         score_rect.midtop = (frame_size_x / 2, frame_size_y / 1.25)
-
     game_window.blit(score_surface, score_rect)
 
-
+# Prikaz menija igre
 def show_menu():
     font = pygame.font.SysFont("consolas", 40)
     while True:
         game_window.fill(green)
         title = font.render("Dobrodošli u igru Zmija!", True, white)
         prompt = font.render("Pritisnite SPACE za početak", True, yellow)
-        game_window.blit(
-            title, (frame_size_x / 2 - title.get_width() / 2, frame_size_y / 3)
-        )
-        game_window.blit(
-            prompt, (frame_size_x / 2 - prompt.get_width() / 2, frame_size_y / 2)
-        )
-        pygame.display.flip()
 
+        game_window.blit(title, (frame_size_x / 2 - title.get_width() / 2, frame_size_y / 3))
+        game_window.blit(prompt, (frame_size_x / 2 - prompt.get_width() / 2, frame_size_y / 2))
+
+        pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    return
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                return
 
-
-# prikaz menija
+# Prikaz menija
 show_menu()
 
-# definisemo pocetni smjer
 direction = "RIGHT"
-# petlja igre
-
 paused = False
+
+
+# Glavna petlja igre
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -107,41 +116,31 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
                 paused = not paused
-
-        if not paused:
-            if event.type == pygame.KEYDOWN:
-                if (
-                    event.key == pygame.K_w or event.key == ord("w")
-                ) and direction != "DOWN":
+            if not paused:
+                if (event.key == pygame.K_w or event.key 
+                    == ord("w")) and direction != "DOWN":
                     direction = "UP"
-                elif (
-                    event.key == pygame.K_s or event.key == ord("s")
-                ) and direction != "UP":
+                elif (event.key == pygame.K_s or event.key 
+                      == ord("s")) and direction != "UP":
                     direction = "DOWN"
-                elif (
-                    event.key == pygame.K_a or event.key == ord("a")
-                ) and direction != "RIGHT":
+                elif (event.key == pygame.K_a or event.key 
+                      == ord("a")) and direction != "RIGHT":
                     direction = "LEFT"
-                elif (
-                    event.key == pygame.K_d or event.key == ord("d")
-                ) and direction != "LEFT":
+                elif (event.key == pygame.K_d or event.key 
+                      == ord("d")) and direction != "LEFT":
                     direction = "RIGHT"
 
     if paused:
-        # Pauza - prikazivanje menija za pauzu
         font = pygame.font.SysFont("consolas", 40)
         while paused:
             game_window.fill(green)
             pause_title = font.render("Pauza", True, white)
-            resume_text = font.render("Pritisnite P za nastavak ", True, yellow)
-            game_window.blit(
-                pause_title,
-                (frame_size_x / 2 - pause_title.get_width() / 2, frame_size_y / 3),
-            )
-            game_window.blit(
-                resume_text,
-                (frame_size_x / 2 - resume_text.get_width() / 2, frame_size_y / 2),
-            )
+
+            resume_text = font.render("Pritisnite P za nastavak", True, yellow)
+
+            game_window.blit(pause_title, (frame_size_x / 2 - pause_title.get_width() / 2, frame_size_y / 3))
+            game_window.blit(resume_text, (frame_size_x / 2 - resume_text.get_width() / 2, frame_size_y / 2))
+
             pygame.display.flip()
 
             for event in pygame.event.get():
@@ -150,7 +149,6 @@ while True:
                     sys.exit()
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
                     paused = False
-
     else:
         # Ako igra nije na pauzi, nastavi sa logikom igre
         if direction == "UP":
@@ -171,42 +169,37 @@ while True:
         elif head_pos[1] > frame_size_y - square_size:
             head_pos[1] = 0
 
-        # jedenje jabuke
+        # Jedenje hrane
         snake_body.insert(0, list(head_pos))
-        if head_pos[0] == food_pos[0] and head_pos[1] == food_pos[1]:
+        if head_pos == food_pos:
             score += 1
             food_spawn = False
         else:
             snake_body.pop()
 
-        # spawnanje hrane
+        # Spawnanje hrane
         if not food_spawn:
-            food_pos = [
-                random.randrange(1, (frame_size_x // square_size)) * square_size,
-                random.randrange(1, (frame_size_y // square_size)) * square_size,
-            ]
+            food_pos = [random.randrange(1, (frame_size_x // square_size)) * square_size, random.randrange(1, (frame_size_y // square_size)) * square_size]
             food_spawn = True
+        
+        # Prikaz igre
+        game_window.fill(green)
+        game_window.blit(snake_head_img, (snake_body[0][0], snake_body[0][1]))
 
-        # GFX
-        game_window.fill((2, 48, 32))
-        for pos in snake_body:
-            pygame.draw.rect(
-                game_window,
-                brightgreen,
-                pygame.Rect(pos[0] + 2, pos[1] + 2, square_size - 2, square_size),
-            )
+        for pos in snake_body[1:]:
+            pygame.draw.rect(game_window, brightgreen, pygame.Rect(pos[0], pos[1], square_size, square_size))
+        
 
-        pygame.draw.rect(
-            game_window,
-            gray,
-            pygame.Rect(food_pos[0], food_pos[1], square_size, square_size),
-        )
-
-        # kraj igre
+        game_window.blit(food_img, (food_pos[0], food_pos[1]))
+        
+        # Provjera sudara
         for block in snake_body[1:]:
-            if head_pos[0] == block[0] and head_pos[1] == block[1]:
+            if head_pos == block:
                 init_vars()
-
+        
         show_score(1, white, "consolas", 20)
+
         pygame.display.update()
+
         fps_controller.tick(speed)
+
