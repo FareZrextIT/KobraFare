@@ -23,6 +23,7 @@ if check_errors[1] > 0:
     print("Greska " + str(check_errors[1]))
 else:
     print("Igra uspjesno inicijalizirana")
+    
 
 # Inicijalizacija prozora igre
 pygame.display.set_caption("Igra Zmija")
@@ -74,7 +75,7 @@ def show_score(choice, color, font, size):
     score_font = pygame.font.SysFont(font, size)
     score_surface = score_font.render("Rezultat: " + str(score), True, color)
     score_rect = score_surface.get_rect()
-    
+
     if choice == 1:
         score_rect.midtop = (frame_size_x / 10, 15)
     else:
