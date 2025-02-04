@@ -28,6 +28,10 @@ Rye Windows 64-bit (x86-64) i  32-bit (x86)
 rye-x86_64-windows.exe
 rye-x86-windows.exe
 ```
+Rye Scoop instaliranje 
+```bash
+scoop install rye 
+```
 Četvrto sinkronizujete
 ```bash
 rye sync
