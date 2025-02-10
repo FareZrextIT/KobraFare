@@ -19,9 +19,18 @@ Drugo trebate da promjenite direktorij
 ```bash
 cd .\KobraFare\
 ```
-Treće Trebate instalirati Rye
+Treće Trebate instalirati Rye macOS/Linux
 ```bash
 curl -sSf https://rye-up.com/get | bash
+```
+Rye Windows 64-bit (x86-64) i  32-bit (x86)
+```bash
+rye-x86_64-windows.exe
+rye-x86-windows.exe
+```
+Rye Scoop instaliranje 
+```bash
+scoop install rye 
 ```
 Četvrto sinkronizujete
 ```bash
