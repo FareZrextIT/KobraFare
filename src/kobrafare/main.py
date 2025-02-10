@@ -7,7 +7,7 @@ import os
 import pygame
 
 # Brzina igre
-speed = 15
+speed = 13
 
 # Veličina kvadrata zmije
 square_size = 30
@@ -23,17 +23,30 @@ if check_errors[1] > 0:
     print("Greska " + str(check_errors[1]))
 else:
     print("Igra uspjesno inicijalizirana")
+
+# Učitavanje muzike
+pygame.mixer.music.load("Cat_C418.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
     
 
 # Inicijalizacija prozora igre
 pygame.display.set_caption("Igra Zmija")
 game_window = pygame.display.set_mode((frame_size_x, frame_size_y))
 
-# Učitavanje slika za zmijinu glavu i hranu
-snake_head_img = pygame.image.load("snake_head.png")
+# Učitavanje slika za zmijinu glavu i svaki smjer
+snake_head_imgs = {
+    "RIGHT": pygame.transform.scale(pygame.image.load("snake_head_right.png"), (square_size, square_size)),
+    "LEFT": pygame.transform.scale(pygame.image.load("snake_head_left.png"), (square_size, square_size)),
+    "UP": pygame.transform.scale(pygame.image.load("snake_head_up.png"), (square_size, square_size)),
+    "DOWN": pygame.transform.scale(pygame.image.load("snake_head.png"), (square_size, square_size)),
+}
 
-snake_head_img = pygame.transform.scale(snake_head_img, (square_size, square_size))
+# Početna slika zmijine glave 
+snake_head_img = snake_head_imgs["RIGHT"]
 
+
+# Učitavanje slike za hranu
 food_img = pygame.image.load("food.png")
 
 food_img = pygame.transform.scale(food_img, (square_size, square_size))
@@ -52,10 +65,11 @@ brown = pygame.Color(160, 128, 96)
 # Kontroler brzine igre
 fps_controller = pygame.time.Clock()
 paused = False
+music_paused = False
 
 # Inicijalizacija varijabli igre
 def init_vars():
-    global head_pos, snake_body, food_pos, food_spawn, score, direction
+    global head_pos, snake_body, food_pos, food_spawn, score, direction, snake_head_img
     direction = "RIGHT"
     head_pos = [120, 60]
     snake_body = [[120, 60]]
@@ -67,8 +81,18 @@ def init_vars():
 
     food_spawn = True
     score = 0
+    snake_head_img = snake_head_imgs["RIGHT"]
 
 init_vars()
+
+# Funkcija za pauziranje muzike
+def toggle_music():
+    global music_paused
+    if music_paused:
+        pygame.mixer.music.unpause()
+    else:
+        pygame.mixer.music.pause()
+    music_paused = not music_paused
 
 # Prikaz rezultata
 def show_score(choice, color, font, size):
@@ -96,6 +120,7 @@ def show_menu():
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.mixer.music.stop()
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
@@ -112,24 +137,30 @@ paused = False
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            pygame.mixer.music.stop()
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
                 paused = not paused
+                toggle_music()
             if not paused:
                 if (event.key == pygame.K_w or event.key 
                     == ord("w")) and direction != "DOWN":
                     direction = "UP"
+                    snake_head_img = snake_head_imgs["UP"]
                 elif (event.key == pygame.K_s or event.key 
                       == ord("s")) and direction != "UP":
                     direction = "DOWN"
+                    snake_head_img = snake_head_imgs["DOWN"]
                 elif (event.key == pygame.K_a or event.key 
                       == ord("a")) and direction != "RIGHT":
                     direction = "LEFT"
+                    snake_head_img = snake_head_imgs["LEFT"]
                 elif (event.key == pygame.K_d or event.key 
                       == ord("d")) and direction != "LEFT":
                     direction = "RIGHT"
+                    snake_head_img = snake_head_imgs["RIGHT"]
 
     if paused:
         font = pygame.font.SysFont("consolas", 40)
@@ -146,20 +177,27 @@ while True:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    pygame.mixer.music.stop()
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
                     paused = False
+                    toggle_music()
     else:
         # Ako igra nije na pauzi, nastavi sa logikom igre
         if direction == "UP":
             head_pos[1] -= square_size
+            
         elif direction == "DOWN":
             head_pos[1] += square_size
+            
+
         elif direction == "LEFT":
             head_pos[0] -= square_size
+            
         else:
             head_pos[0] += square_size
+            snake_head_img=snake_head_img
 
         if head_pos[0] < 0:
             head_pos[0] = frame_size_x - square_size
