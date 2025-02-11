@@ -45,6 +45,13 @@ snake_head_imgs = {
 # Početna slika zmijine glave 
 snake_head_img = snake_head_imgs["RIGHT"]
 
+# Slika za rep zmije 
+snake_tail_img = pygame.image.load("snake_tail.png")
+
+# Skaliranje Slike
+snake_tail_img = pygame.transform.scale(snake_tail_img, (square_size, square_size))
+
+
 
 # Učitavanje slike za hranu
 food_img = pygame.image.load("food.png")
@@ -228,7 +235,11 @@ while True:
         for pos in snake_body[1:]:
             pygame.draw.rect(game_window, brightgreen, pygame.Rect(pos[0], pos[1], square_size, square_size))
         
+        # Prikazivanje repa zmije
+        game_window.blit(snake_tail_img, (snake_body[-1][0], snake_body[-1][1]))
 
+
+        # Prikazivanje hrane 
         game_window.blit(food_img, (food_pos[0], food_pos[1]))
         
         # Provjera sudara
