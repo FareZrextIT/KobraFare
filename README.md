@@ -60,7 +60,8 @@ Tipkom P igra se pauzira.
 
 
 # Ekran Igre
-![image](https://github.com/user-attachments/assets/0aae7d3c-4b3d-4124-828a-2dc315fbf743)
+![Ekran igre](https://github.com/user-attachments/assets/487618ae-f884-482c-862f-aee85815c7cd)
+
 
 
 
