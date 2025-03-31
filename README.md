@@ -25,7 +25,7 @@ curl -sSf https://rye-up.com/get | bash
 ```
 Rye Windows 64-bit (x86-64) i  32-bit (x86)
 
-[rye-x86_64-windows.exe] <br> [rye-x86-windows.exe](https://rye.astral.sh/guide/installation/#installing-rye)
+[rye-x86_64-windows.exe](https://rye.astral.sh/guide/installation/#installing-rye) <br> [rye-x86-windows.exe](https://rye.astral.sh/guide/installation/#installing-rye)
 
 
 Rye Scoop instaliranje 
