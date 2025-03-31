@@ -231,12 +231,16 @@ while True:
         # Prikaz igre
         game_window.fill(green)
         game_window.blit(snake_head_img, (snake_body[0][0], snake_body[0][1]))
+       
+        for i, pos in enumerate(snake_body):
+             if i == 0:  # Glava zmije (prvi segment)
+                game_window.blit(snake_head_img, (pos[0], pos[1]))
+             elif i == len(snake_body) - 1:  # Rep zmije (posljednji segment)
+                game_window.blit(snake_tail_img, (pos[0], pos[1]))
+             else:  # Tijelo zmije (srednji segmenti)
+                pygame.draw.rect(game_window, brightgreen, pygame.Rect(pos[0], pos[1], square_size, square_size))
 
-        for pos in snake_body[1:]:
-            pygame.draw.rect(game_window, brightgreen, pygame.Rect(pos[0], pos[1], square_size, square_size))
-        
-        # Prikazivanje repa zmije
-        game_window.blit(snake_tail_img, (snake_body[-1][0], snake_body[-1][1]))
+
 
 
         # Prikazivanje hrane 
