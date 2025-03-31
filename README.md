@@ -60,7 +60,8 @@ Tipkom P igra se pauzira.
 
 
 # Ekran Igre
-![image](https://github.com/user-attachments/assets/dbf97ba7-92cb-425b-ae48-d58555f922d7)
+![image](https://github.com/user-attachments/assets/0aae7d3c-4b3d-4124-828a-2dc315fbf743)
+
 
 
 # Pauza ekran
