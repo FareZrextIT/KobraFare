@@ -8,7 +8,8 @@
 
 # O igri općenito
 Igra Zmija je žanr akcionih video igara u kojima igrač upravlja zmiju. <br>
-Zadatak igrača je da spriječi da zmija dođe u kontakt sa vlastitim tijelom,što postaje sve teže kako se zmija izdužuje.
+Zadatak igrača u mojoj igri je da spriječi da zmija dođe u kontakt sa vlastitim tijelom,što postaje sve teže kako se zmija izdužuje. <br>
+Zmija se izdužuje tako što jede hranu(miša) i kako se zmija izdužuje tako se i povečava rezultat u igri.
 
 # Pokretanje igre
 Prvo trebate da klonirate projekat na terminalu
