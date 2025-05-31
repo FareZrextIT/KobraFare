@@ -7,8 +7,8 @@
 4. [Kontrole](#kontrole)
 
 # O igri općenito
-Igra Zmija je žanr akcionih video igara u kojima igrač upravlja zmiju.Igrač mora sprječiti da se zmija sudara sa samim sobom,
-što postaje teže kako se zmija izdužuje.
+Igra Zmija je žanr akcionih video igara u kojima igrač upravlja zmiju. <br>
+Zadatak igrača je da spriječi da zmija dođe u kontakt sa vlastitim tijelom,što postaje sve teže kako se zmija izdužuje.
 
 # Pokretanje igre
 Prvo trebate da klonirate projekat na terminalu
@@ -21,7 +21,7 @@ cd .\KobraFare\
 ```
 Treće Trebate instalirati Rye macOS/Linux
 ```bash
-curl -sSf https://rye-up.com/get | bash
+curl -sSf https://rye-up.com/get
 ```
 Rye Windows 64-bit (x86-64) i  32-bit (x86)
 
