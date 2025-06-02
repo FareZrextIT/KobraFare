@@ -56,17 +56,17 @@ Na početku će biti ekran na kojem će pisati pritisnite tipku space na tastatu
 Tipkom P igra se pauzira.
 
 
-# Početni ekran
+# Početni meni
 ![image](https://github.com/user-attachments/assets/14832df7-56aa-4d42-aac1-4cdd61c6c9b9)
 
 
-# Ekran Igre
+# Igra
 ![Ekran igre](https://github.com/user-attachments/assets/487618ae-f884-482c-862f-aee85815c7cd)
 
 
 
 
-# Pauza ekran
+# Pauza
 ![image](https://github.com/user-attachments/assets/f59d4535-f234-447b-a8ac-7bcf118743ac)
 
 
